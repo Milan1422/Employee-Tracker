@@ -8,11 +8,20 @@ CREATE DATABASE employer_db;
 USE employer_db;
 
 -- creates employee table in employer database
-CREATE TABLE employees (
+CREATE TABLE employee (
     id INT AUTO_INCREMENT,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     role_id INT NOT NULL,
     manager_id INT,
+    PRIMARY KEY(id)
+);
+
+-- creates role table in employer database
+CREATE TABLE role (
+    id INT AUTO_INCREMENT,
+    title VARCHAR(30) NOT NULL,
+    salary DECIMAL (8,2) NOT NULL,
+    department_id INT,
     PRIMARY KEY(id)
 )
