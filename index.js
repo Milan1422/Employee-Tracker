@@ -35,6 +35,38 @@ const promptUser = () => {
             'Quit'
         ]
     })
+    // after they answer the app runs a specific function based on their pick
+    .then((answer) => {
+        switch (answer.action) {
+            case 'View All Employees':
+                viewEmployee();
+                break;
+            case 'Add an Employee':
+                addEmployee();
+                break;
+            case 'Update an Employee':
+                updateEmployee();
+                break;
+            case 'View All Roles':
+                viewRoles();
+                break;
+            case 'Add a Role':
+                addRole();
+                break;
+            case 'View All Departments':
+                viewDepartments();
+                break;
+            case 'Add a Department':
+                addDepartment();
+                break;
+            case 'Quit':
+                connection.end();
+                break;
+        
+            default:
+                console.log(`Invalid Action: ${answer.action}`);
+                break;
+        }
+    })
 }
-
 promptUser();
