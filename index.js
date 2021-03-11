@@ -78,4 +78,34 @@ const viewEmployees = () => {
         console.log(res);
     })
 }
+// function that lets us create a new instance of employee
+const addEmployee = () => {
+    inquirer.prompt([
+        {
+            name: 'firstname',
+            type: 'input',
+            message: 'What is the first name of the new employee?'
+        },
+        {
+            name: 'lastname',
+            type: 'input',
+            message: 'What is the last name of the new employee?'
+        },
+        {
+            name: 'role',
+            type: 'input',
+            message: 'What is the role of the new employee?'
+        },
+        {
+            name: 'manager',
+            type: 'list',
+            message: 'Who is the manager of the new employee?',
+            choices: [
+                'Jesus',
+                'John',
+                'None'
+            ]
+        }
+    ])
+}
 promptUser();
