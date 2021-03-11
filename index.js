@@ -37,9 +37,9 @@ const promptUser = () => {
     })
     // after they answer the app runs a specific function based on their pick
     .then((answer) => {
-        switch (answer.action) {
+        switch (answer.opening) {
             case 'View All Employees':
-                viewEmployee();
+                viewEmployees();
                 break;
             case 'Add an Employee':
                 addEmployee();
@@ -64,9 +64,18 @@ const promptUser = () => {
                 break;
         
             default:
-                console.log(`Invalid Action: ${answer.action}`);
+                console.log(`Invalid Action: ${answer.opening}`);
                 break;
         }
+    })
+}
+
+// function that lets us see all employees
+const viewEmployees = () => {
+    const query = 'SELECT * FROM employee;';
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.log(res);
     })
 }
 promptUser();
