@@ -137,5 +137,16 @@ const viewRoles = () => {
     })
 }
 
+// function that displays department
+const viewDepartments = () => {
+    const query = 'SELECT * FROM department;';
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.log(res);
+        promptUser();
+    })
+}
+
+
 // runs app onces user uses node index,js
 promptUser();
