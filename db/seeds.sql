@@ -8,3 +8,7 @@ VALUES ('John', 'Doe', 1, 1);
 -- we use this block of code to insert new rows to the role table
 INSERT INTO role (title, salary, department_id)
 VALUES ('Manager', 90000, 1);
+
+-- we use this block of code to insert new rows to the role table
+INSERT INTO department (name)
+VALUE ('Sales');
