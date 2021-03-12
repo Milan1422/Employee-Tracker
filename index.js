@@ -94,16 +94,29 @@ const addEmployee = () => {
         },
         {
             name: 'role',
-            type: 'input',
-            message: 'What is the role of the new employee?'
+            type: 'list',
+            message: 'What is the role of the new employee?',
+            choices: [
+                'Sales Lead',
+                'Salesperson',
+                'Lead Engineer',
+                'Software Engineer',
+                'Account Manager',
+                'Legal Team Lead',
+                'Lawyer'
+            ]
         },
         {
             name: 'manager',
             type: 'list',
             message: 'Who is the manager of the new employee?',
             choices: [
-                'Jesus',
-                'John',
+                'James P. Sullivan',
+                'Randal Boggs',
+                'Mike Wazowski',
+                'George Sanderson',
+                'Boo Gibbs',
+                'Celia Tilly',
                 'None'
             ]
         }
