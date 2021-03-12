@@ -107,5 +107,22 @@ const addEmployee = () => {
             ]
         }
     ])
+// after user is done with the prompts we use the answers to update employees table
+.then((answer) => {
+    connection.query(
+        'INSERT INTO employee SET ?',
+        {
+            first_name: answer.firstname,
+            last_name: answer.lastname,
+            role_id: answer.role,
+            manager_id: answer.manager
+        },
+        (err) => {
+            if (err) throw err;
+            console.log('success!');
+            promptUser();
+        }
+    )
+})
 }
 promptUser();
