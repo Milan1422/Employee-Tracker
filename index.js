@@ -76,6 +76,7 @@ const viewEmployees = () => {
     connection.query(query, (err, res) => {
         if (err) throw err;
         console.log(res);
+        promptUser();
     })
 }
 // function that lets us create a new instance of employee
@@ -125,4 +126,16 @@ const addEmployee = () => {
     )
 })
 }
+
+// function that displays roles
+const viewRoles = () => {
+    const query = 'SELECT * FROM role;';
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.log(res);
+        promptUser();
+    })
+}
+
+// runs app onces user uses node index,js
 promptUser();
