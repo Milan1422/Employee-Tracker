@@ -14,3 +14,27 @@ VALUES ('Finance');
 INSERT INTO department (name)
 VALUES ('Legal');
 
+-- we use this block of code to insert new rows to the role table
+INSERT INTO role (title, salary)
+VALUES ('Sales Lead', 100000);
+
+INSERT INTO role (title, salary)
+VALUES ('Salesperson', 80000);
+
+INSERT INTO role (title, salary)
+VALUES ('Lead Engineer', 150000);
+
+INSERT INTO role (title, salary)
+VALUES ('Software Engineer', 120000);
+
+INSERT INTO role (title, salary)
+VALUES ('Account Manager', 160000);
+
+INSERT INTO role (title, salary)
+VALUES ('Accountant', 125000);
+
+INSERT INTO role (title, salary)
+VALUES ('Legal Team Lead', 250000);
+
+INSERT INTO role (title, salary)
+VALUES ('Lawyer', 190000);
