@@ -203,6 +203,17 @@ const viewDepartments = () => {
     })
 }
 
+// function to add a new department
+const addDepartment = () => {
+    inquirer.prompt(
+        {
+            name,
+            type: 'input',
+            message: 'what is the name of the department'
+        }
+    )
+}
+
 
 // runs app onces user uses node index,js
 promptUser();
