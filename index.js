@@ -152,6 +152,16 @@ const viewRoles = () => {
 
 // function to add a role
 const addRole = () => {
+    // getting choices from department table
+    const depts = [];
+    connection.query("SELECT * FROM department", function(err, res) {
+        if (err) throw err;
+        for(let i = 0; i<res.length; i++){
+            depts.push(res[i].name);
+        }
+      });
+
+    //prompts for new role 
     inquirer.prompt([
         {
             name: 'rolename',
@@ -167,12 +177,7 @@ const addRole = () => {
             name: 'department',
             type: 'list',
             message: 'TO which department does the role belong to?',
-            choices: [
-                'Sales',
-                'Engineering',
-                'Finance',
-                'Legal'
-            ]
+            choices: depts
         },
     ])
     // after we are done with prompts add answers as a seed for role table
