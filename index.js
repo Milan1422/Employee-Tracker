@@ -153,22 +153,17 @@ const viewRoles = () => {
 // function to add a role
 const addRole = () => {
     // getting choices from department table
-    const depts = [];
     connection.query("SELECT * FROM department", function(err, res) {
         if (err) throw err;
-        for(let i = 0; i<res.length; i++){
-            depts.push(res[i].name);
-        }
-      });
-
-    //prompts for new role 
-    inquirer.prompt([
-        {
-            name: 'rolename',
-            type: 'input',
-            message: 'What is the name of the role?'
-        },
-        {
+        
+        //prompts for new role 
+        inquirer.prompt([
+            {
+                name: 'rolename',
+                type: 'input',
+                message: 'What is the name of the role?'
+            },
+            {
             name: 'salary',
             type: 'input',
             message: 'What is the salary of the role?'
@@ -177,25 +172,40 @@ const addRole = () => {
             name: 'department',
             type: 'list',
             message: 'TO which department does the role belong to?',
-            choices: depts
+            choices: function () {
+                const depts = [];
+                for(let i = 0; i<res.length; i++){
+                    depts.push(res[i].name);
+                }
+                return depts;
+            }
         },
     ])
     // after we are done with prompts add answers as a seed for role table
     .then((answer) => {
+        let chosenDept;
+            
+        for (let i = 0; i < res.length; i++) {
+            if (res[i].name === answer.dept) {
+                chosenDept = res[i].id;
+            }
+        }
+        
         connection.query(
             'INSERT INTO role SET ?', 
             {
                 title: answer.rolename,
                 salary: answer.salary,
-                department: answer.department
+                department: chosenDept
             },
             (err) => {
                 if (err) throw err;
                 console.log('success!');
                 promptUser();
             }
-        )
-    })
+            )
+        })
+    });
 }
 
 // function that displays department
