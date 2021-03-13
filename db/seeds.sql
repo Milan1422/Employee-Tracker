@@ -38,3 +38,22 @@ VALUES ('Legal Team Lead', 250000);
 
 INSERT INTO role (title, salary)
 VALUES ('Lawyer', 190000);
+
+-- we use this block of code to insert new rows to the employee table
+INSERT INTO employee (first_name, last_name)
+VALUES ('James P.', 'Sullivan');
+
+INSERT INTO employee (first_name, last_name)
+VALUES ('Randal', 'Boggs');
+
+INSERT INTO employee (first_name, last_name)
+VALUES ('Mike', 'Wazowski');
+
+INSERT INTO employee (first_name, last_name)
+VALUES ('George', 'Sanderson');
+
+INSERT INTO employee (first_name, last_name)
+VALUES ('Boo', 'Gibbs');
+
+INSERT INTO employee (first_name, last_name)
+VALUES ('Celia', 'Tilly');
