@@ -81,63 +81,67 @@ const viewEmployees = () => {
 }
 // function that lets us create a new instance of employee
 const addEmployee = () => {
-    inquirer.prompt([
-        {
-            name: 'firstname',
-            type: 'input',
-            message: 'What is the first name of the new employee?'
-        },
-        {
-            name: 'lastname',
-            type: 'input',
-            message: 'What is the last name of the new employee?'
-        },
-        {
-            name: 'role',
-            type: 'list',
-            message: 'What is the role of the new employee?',
-            choices: [
-                'Sales Lead',
-                'Salesperson',
-                'Lead Engineer',
-                'Software Engineer',
-                'Account Manager',
-                'Legal Team Lead',
-                'Lawyer'
-            ]
-        },
-        {
-            name: 'manager',
-            type: 'list',
-            message: 'Who is the manager of the new employee?',
-            choices: [
-                'James P. Sullivan',
-                'Randal Boggs',
-                'Mike Wazowski',
-                'George Sanderson',
-                'Boo Gibbs',
-                'Celia Tilly',
-                'None'
-            ]
-        }
-    ])
-// after user is done with the prompts we use the answers to update employees table
-.then((answer) => {
-    connection.query(
-        'INSERT INTO employee SET ?',
-        {
-            first_name: answer.firstname,
-            last_name: answer.lastname,
-            role_id: answer.role,
-            manager_id: answer.manager
-        },
-        (err) => {
-            if (err) throw err;
-            console.log('success!');
-            promptUser();
-        }
-    )
-})
+    connection.query('SELECT * FROM employee', function(err, resEmp){
+        if (err) throw err;
+        connection.query('SELECT * FROM role', function(err, resRole){
+            if(err) throw err;
+            
+            inquirer.prompt([
+                {
+                    name: 'firstname',
+                    type: 'input',
+                    message: 'What is the first name of the new employee?'
+                },
+                {
+                    name: 'lastname',
+                    type: 'input',
+                    message: 'What is the last name of the new employee?'
+                },
+                {
+                    name: 'role',
+                    type: 'list',
+                    message: 'What is the role of the new employee?',
+                    choices: function () {
+                        let roles = [];
+                        for (let i = 0; i < resRole.length; i++) {
+                            roles.push(resRole[i].title);
+                          }
+                          return roles;
+                    }
+                },
+                {
+                    name: 'manager',
+                    type: 'list',
+                    message: 'Who is the manager of the new employee?',
+                    choices: function () {
+                        let managers = [];
+                        for (let i = 0; i < resEmp.length; i++) {
+                            managers.push(resEmp[i].first_name + resEmp[i].last_name);
+                          }
+                          return managers;
+                    }
+                },
+            ])
+            // after user is done with the prompts we use the answers to update employees table
+            .then((answer) => {
+                connection.query(
+                    'INSERT INTO employee SET ?',
+                    {
+                        first_name: answer.firstname,
+                        last_name: answer.lastname,
+                        role_id: answer.role,
+                        manager_id: answer.manager
+                    },
+                    (err) => {
+                        if (err) throw err;
+                        console.log('success!');
+                        promptUser();
+                    }
+                )
+            })
+
+        })
+    })
 }
 
 // function that displays roles
