@@ -145,9 +145,36 @@ const viewRoles = () => {
     const query = 'SELECT * FROM role;';
     connection.query(query, (err, res) => {
         if (err) throw err;
-        console.log(res);
+        console.table(res);
         promptUser();
     })
+}
+
+// function to add a role
+const addRole = () => {
+    inquirer.prompt([
+        {
+            name: 'rolename',
+            type: 'input',
+            message: 'What is the name of the role?'
+        },
+        {
+            name: 'salary',
+            type: 'input',
+            message: 'What is the salary of the role?'
+        },
+        {
+            name: 'department',
+            type: 'list',
+            message: 'TO which department does the role belong to?',
+            choices: [
+                'Sales',
+                'Engineering',
+                'Finance',
+                'Legal'
+            ]
+        },
+    ])
 }
 
 // function that displays department
