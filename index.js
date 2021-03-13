@@ -124,13 +124,27 @@ const addEmployee = () => {
             ])
             // after user is done with the prompts we use the answers to update employees table
             .then((answer) => {
+                let chosenRole;
+                for (let i = 0; i < resRole.length; i++) {
+                  if (resRole[i].title === answer.role) {
+                    chosenRole = resRole[i].id;
+                  }
+                };
+                var chosenMngr;
+                for (let i = 0; i < resEmp.length; i++) {
+                  if (resEmp[i].first_name + resEmp[i].last_name === answer.manager) {
+                    chosenMngr = resEmp[i].id;
+                  } else if (answer.manager === "None"){
+                    chosenMngr = null
+                  }
+                }
                 connection.query(
                     'INSERT INTO employee SET ?',
                     {
                         first_name: answer.firstname,
                         last_name: answer.lastname,
-                        role_id: answer.role,
-                        manager_id: answer.manager
+                        title: chosenRole,
+                        manager: chosenMngr
                     },
                     (err) => {
                         if (err) throw err;
