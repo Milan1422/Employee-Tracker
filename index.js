@@ -181,8 +181,8 @@ const addRole = () => {
             'INSERT INTO role SET ?', 
             {
                 title: answer.rolename,
-                salary,
-                department
+                salary: answer.salary,
+                department: answer.department
             },
             (err) => {
                 if (err) throw err;
@@ -212,6 +212,20 @@ const addDepartment = () => {
             message: 'what is the name of the department'
         }
     )
+    // the user input then gets added as a new row in deparment table
+    .then((answer) => {
+        connection.query(
+            'INSERT INTO department SET ?', 
+            {
+                name: answer.name,
+            },
+            (err) => {
+                if (err) throw err;
+                console.log('success!');
+                promptUser();
+            }
+        )
+    })
 }
 
 
