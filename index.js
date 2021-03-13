@@ -175,6 +175,22 @@ const addRole = () => {
             ]
         },
     ])
+    // after we are done with prompts add answers as a seed for role table
+    .then((answer) => {
+        connection.query(
+            'INSERT INTO role SET ?', 
+            {
+                title: answer.rolename,
+                salary,
+                department
+            },
+            (err) => {
+                if (err) throw err;
+                console.log('success!');
+                promptUser();
+            }
+        )
+    })
 }
 
 // function that displays department
