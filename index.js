@@ -240,7 +240,7 @@ const viewDepartments = () => {
 const addDepartment = () => {
     inquirer.prompt(
         {
-            name,
+            name: 'name',
             type: 'input',
             message: 'what is the name of the department'
         }
